@@ -1,0 +1,408 @@
+{
+	"info": {
+		"_postman_id": "bd053d2e-0a56-4c4c-8367-0744ef87900b",
+		"name": "Gestión de Películas y Turnos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Películas",
+			"item": [
+				{
+					"name": "1. Crear Película",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"const responseData = pm.response.json();",
+									"pm.environment.set(\"peliculaId\", responseData.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"X-Men: Días del futuro pasado\",\n    \"fechaEstreno\": \"2016-05-10\",\n    \"sinopsis\": \"Sinopsis de la película\",\n    \"duracionMin\": 131,\n    \"clasificacion\": \"PG-13\",\n    \"generos\": [\"Ciencia ficción\", \"Acción\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/peliculas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Listar Películas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response is an array\", function () {",
+									"    pm.expect(pm.response.json().data).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/peliculas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Obtener Película por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"ID matches\", function () {",
+									"    pm.expect(pm.response.json().data.id).to.eql(pm.environment.get(\"peliculaId\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/peliculas/{{peliculaId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"{{peliculaId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Actualizar Película",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Message is correct\", function () {",
+									"    pm.expect(pm.response.json().message).to.eql(\"Película actualizada correctamente.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"X-Men: Días del futuro pasado (Actualizada)\",\n    \"fechaEstreno\": \"2016-05-10\",\n    \"sinopsis\": \"Sinopsis de la película\",\n    \"duracionMin\": 131,\n    \"clasificacion\": \"PG-13\",\n    \"generos\": [\"Ciencia ficción\", \"Acción\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/peliculas/{{peliculaId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"{{peliculaId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Eliminar Película (Soft-Delete)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Message is correct\", function () {",
+									"    pm.expect(pm.response.json().message).to.eql(\"Película y turnos asociados marcados como eliminados.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/peliculas/{{peliculaId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"{{peliculaId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Turnos",
+			"item": [
+				{
+					"name": "1. Crear Turno (para Soft-Delete en cascada)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Turno created successfully\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.message).to.eql(\"Turno creado correctamente.\");",
+									"});",
+									"const responseData = pm.response.json();",
+									"pm.environment.set(\"turnoId\", responseData.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"peliculaId\": {{peliculaId}},\n    \"sala\": \"A\",\n    \"inicio\": \"2025-08-27T10:00:00Z\",\n    \"fin\": \"2025-08-27T12:00:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/turnos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"turnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Listar Turnos de una Película",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response is an array\", function () {",
+									"    pm.expect(pm.response.json().data).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/turnos?peliculaId={{peliculaId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"turnos"
+							],
+							"query": [
+								{
+									"key": "peliculaId",
+									"value": "{{peliculaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Actualizar Turno",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Message is correct\", function () {",
+									"    pm.expect(pm.response.json().message).to.eql(\"Turno actualizado correctamente.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sala\": \"B\",\n    \"inicio\": \"2025-08-27T13:00:00Z\",\n    \"fin\": \"2025-08-27T15:00:00Z\",\n    \"peliculaId\": {{peliculaId}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/turnos/{{turnoId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"turnos",
+								"{{turnoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Eliminar Turno (Soft-Delete)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Message is correct\", function () {",
+									"    pm.expect(pm.response.json().message).to.eql(\"Turno marcado como eliminado.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/turnos/{{turnoId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"turnos",
+								"{{turnoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Intentar crear turno solapado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"pm.test(\"Error message is correct\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.message).to.eql(\"Ya existe un turno en esta sala durante este horario.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"peliculaId\": {{peliculaId}},\n    \"sala\": \"B\",\n    \"inicio\": \"2025-08-27T13:30:00Z\",\n    \"fin\": \"2025-08-27T15:30:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/turnos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"turnos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
