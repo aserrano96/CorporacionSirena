@@ -401,51 +401,50 @@
 						}
 					},
 					"response": []
-				}
-
+				},
 				{
-				    "name": "6. Crear Turnos de forma masiva",
-				    "event": [
-				        {
-				            "listen": "test",
-				            "script": {
-				                "exec": [
-				                    "pm.test(\"Status code is 201\", function () {",
-				                    "    pm.response.to.have.status(201);",
-				                    "});",
-				                    "pm.test(\"Message is correct\", function () {",
-				                    "    pm.expect(pm.response.json().message).to.eql(\"Turnos creados exitosamente.\");",
-				                    "});"
-				                ],
-				                "type": "text/javascript"
-				            }
-				        }
-				    ],
-				    "request": {
-				        "method": "POST",
-				        "header": [
-				            {
-				                "key": "Content-Type",
-				                "value": "application/json"
-				            }
-				        ],
-				        "body": {
-				            "mode": "raw",
-				            "raw": "{\n    \"turnos\": [\n        {\n            \"sala\": \"A\",\n            \"inicio\": \"2025-08-28T10:00:00Z\",\n            \"fin\": \"2025-08-28T12:00:00Z\"\n        },\n        {\n            \"sala\": \"B\",\n            \"inicio\": \"2025-08-28T13:00:00Z\",\n            \"fin\": \"2025-08-28T15:00:00Z\"\n        }\n    ]\n}"
-				        },
-				        "url": {
-				            "raw": "{{base_url}}/peliculas/{{peliculaId}}/turnos:bulkCreate",
-				            "host": [
-				                "{{base_url}}"
-				            ],
-				            "path": [
-				                "peliculas",
-				                "{{peliculaId}}",
-				                "turnos:bulkCreate"
-				            ]
-				        }
-				    },
-				    "response": []
+					"name": "6. Crear Turnos de forma masiva",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Message is correct\", function () {",
+									"    pm.expect(pm.response.json().message).to.eql(\"Turnos creados exitosamente.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"turnos\": [\n        {\n            \"sala\": \"A\",\n            \"inicio\": \"2025-08-28T10:00:00Z\",\n            \"fin\": \"2025-08-28T12:00:00Z\"\n        },\n        {\n            \"sala\": \"B\",\n            \"inicio\": \"2025-08-28T13:00:00Z\",\n            \"fin\": \"2025-08-28T15:00:00Z\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/peliculas/{{peliculaId}}/turnos:bulkCreate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peliculas",
+								"{{peliculaId}}",
+								"turnos:bulkCreate"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
