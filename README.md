@@ -63,6 +63,10 @@ Configurar la Base de Datos:
 Crea una base de datos PostgreSQL con el nombre sirenadb.
 
 Asegúrate de que la configuración en server.js coincida con las credenciales de tu base de datos.
+DB_HOST=localhost
+DB_USER=postgres
+DB_PASSWORD=admin
+DB_NAME=sirenadb
 
 Instalar dependencias del backend:
 
@@ -81,18 +85,12 @@ Abrir la aplicación en el navegador:
 
 Abre el archivo index.html en tu navegador para comenzar a usar la aplicación.
 
-🤝 Contribuciones
-Siéntete libre de contribuir a este proyecto. Para ello, por favor, sigue estos pasos:
+El colecction postman se encuentra en un archivo en el main.
 
-Haz un fork del repositorio.
+Abre Postman y selecciona la opción para importar.
 
-Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).
+Elige la opción Paste Raw Text (Pegar Texto sin Formato).
 
-Realiza tus cambios y commit con mensajes claros.
+Copia el texto completo. (Deberia cargar como la siguiente imagen)
 
-Haz push a tu rama (git push origin feature/nueva-funcionalidad).
-
-Abre un Pull Request detallando tus cambios.
-
-📄 Licencia
-Este proyecto está bajo la Licencia MIT.
+<img width="325" height="398" alt="image" src="https://github.com/user-attachments/assets/53196532-c23f-42f7-8cfa-81c0d04cfdc9" />
