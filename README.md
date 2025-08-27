@@ -56,8 +56,8 @@ Clonar el repositorio:
 
 Bash
 
-git clone https://github.com/[nombre-de-usuario]/[nombre-de-tu-repositorio].git
-cd [nombre-de-tu-repositorio]
+git clone https://github.com/aserrano96/CorporacionSirena.git
+cd CorporacionSirena
 Configurar la Base de Datos:
 
 Crea una base de datos PostgreSQL con el nombre sirenadb.
@@ -68,7 +68,7 @@ Instalar dependencias del backend:
 
 Bash
 
-cd [nombre-de-tu-repositorio]
+cd CorporacionSirena
 npm install
 Iniciar el servidor:
 
