@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Películas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Gestión de Películas y Turnos</h1>
+    </header>
+
+    <main>
+        <div id="peliculas-container">
+            <h2>Películas</h2>
+            <button id="btn-nueva-pelicula" class="btn-primary">Nueva película</button>
+            
+            <table id="tabla-peliculas">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>F. Publicación</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+
+        <div id="form-pelicula-container" class="hidden">
+            <h2 id="form-title">Nueva película</h2>
+            <form id="form-pelicula">
+                <input type="hidden" id="id-input">
+                <label for="titulo-input">Nombre:</label>
+                <input type="text" id="titulo-input" required>
+                <label for="fecha-estreno-input">F. Publicación:</label>
+                <input type="date" id="fecha-estreno-input">
+                <label for="sinopsis-input">Sinopsis:</label>
+                <textarea id="sinopsis-input"></textarea>
+                <label for="duracion-min-input">Duración (min):</label>
+                <input type="number" id="duracion-min-input">
+                <label for="clasificacion-input">Clasificación:</label>
+                <input type="text" id="clasificacion-input">
+                <label for="generos-input">Géneros (separados por coma):</label>
+                <input type="text" id="generos-input">
+                <button type="submit">Guardar</button>
+                <button type="button" id="btn-cancelar-pelicula">Cancelar</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

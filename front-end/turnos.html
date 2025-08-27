@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Turnos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Gestión de Películas y Turnos</h1>
+    </header>
+
+    <main>
+        <div id="lista-turnos-view">
+            <h2 id="turnos-titulo">Turnos para: <span id="pelicula-titulo-turnos"></span></h2>
+            <div>
+                <button id="btn-nuevo-turno">Nuevo Turno</button>
+                <button id="btn-volver-peliculas">Volver a Películas</button>
+            </div>
+            
+            <table id="tabla-turnos">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Sala</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="form-turno-view" class="hidden">
+            <h2 id="form-turno-title">Nuevo Turno</h2>
+            <form id="form-turno">
+                <input type="hidden" id="turno-id-input">
+                <input type="hidden" id="turno-pelicula-id-input">
+                <label for="sala-input">Sala:</label>
+                <input type="text" id="sala-input" required>
+                <label for="inicio-input">Inicio:</label>
+                <input type="datetime-local" id="inicio-input" required>
+                <label for="fin-input">Fin:</label>
+                <input type="datetime-local" id="fin-input" required>
+                <button type="submit">Guardar</button>
+                <button type="button" id="btn-cancelar-turno">Cancelar</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="turnos.js"></script>
+</body>
+</html>
